@@ -1,50 +1,129 @@
-# Welcome to your Expo app 👋
+# Mindfulness App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A simple mindfulness app where users can:
 
-## Get started
+- Select meditation music.
+- Set a meditation timer.
+- Start the meditation session.
 
-1. Install dependencies
+https://github.com/user-attachments/assets/a011a103-1de0-4b6a-ae7c-017c8c52c505
 
-   ```bash
+
+- Set reminders with push notifications to stay consistent.
+
+## Features
+
+1. **Meditation Music**
+   - Choose from a curated list of meditation tracks to enhance your mindfulness sessions.
+
+2. **Meditation Timer**
+   - Set the desired duration for your meditation session.
+   - Automatically stop the music when the timer ends.
+
+3. **Push Notifications**
+   - Schedule daily reminders for meditation.
+   - Notifications include customizable times to fit your routine.
+  
+   - 
+
+## Installation
+
+1. Clone the repository:
+
+   bash
+   git clone https://github.com/your-username/mindfulness-app.git
+   cd mindfulness-app
+   
+
+2. Install dependencies:
+
+   bash
    npm install
-   ```
+   
 
-2. Start the app
+3. Start the development server:
 
-   ```bash
-    npx expo start
-   ```
+   bash
+   npm start
+   
 
-In the output, you'll find options to open the app in a
+4. Scan the QR code with Expo Go (on Android/iOS) to run the app on your device.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Dependencies
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+- **React Native**: Core framework for building mobile applications.
+- **Expo**: Platform for faster React Native development.
+- **react-native-modal-datetime-picker**: For selecting meditation times.
+- **expo-notifications**: For scheduling and managing push notifications.
 
-## Get a fresh project
+## Usage
 
-When you're ready, run:
+1. Launch the app on your mobile device.
+2. Select a meditation track from the home screen.
+3. Set the desired meditation duration using the time picker.
+4. Press play to start the meditation.
+5. Optionally, schedule reminders to meditate at your preferred time.
 
-```bash
-npm run reset-project
-```
+## Project Structure
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
 
-## Learn more
+.
+├── components/
+│   └── MusicPlayer.js    # Component for playing meditation music
+├── screens/
+│   ├── HomeScreen.js     # Main screen with meditation options
+│   ├── TimerScreen.js    # Timer setup and management
+│   └── ReminderScreen.js # Push notification scheduling
+├── styles/
+│   └── layout.styles.js  # Shared styles for the app
+├── App.js                # Entry point of the application
+└── package.json          # Project dependencies and scripts
 
-To learn more about developing your project with Expo, look at the following resources:
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## Notifications Setup
 
-## Join the community
+To enable push notifications:
 
-Join our community of developers creating universal apps.
+1. Install `expo-notifications`:
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+   bash
+   expo install expo-notifications
+   
+
+2. Request permissions in your app:
+
+   javascript
+   import * as Notifications from 'expo-notifications';
+
+   useEffect(() => {
+     const requestPermissions = async () => {
+       const { status } = await Notifications.requestPermissionsAsync();
+       if (status !== 'granted') {
+         alert('Permission for notifications not granted!');
+       }
+     };
+
+     requestPermissions();
+   }, []);
+   
+
+3. Schedule a notification:
+
+   javascript
+   await Notifications.scheduleNotificationAsync({
+     content: {
+       title: "Meditation Reminder",
+       body: "It's time for your daily meditation!",
+     },
+     trigger: {
+       hour: 8,
+       minute: 0,
+       repeats: true,
+     },
+   });
+   
+
+
+---
+
+Enjoy your journey to mindfulness and tranquility! 🌿
